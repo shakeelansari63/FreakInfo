@@ -45,7 +45,9 @@ python3.6 get-pip.py
 # Set PYSPARK PYTHON variable for spark 
 
 Ambari --> Spark/Spark2 --> Config --> Advanced spark2-env 
+
 Add line: 
+
 export PYSPARK_PYTHON=/usr/local/bin/python2.7
 
 Restart Spark service
