@@ -1,4 +1,4 @@
-# Install Python2.7 & 3.6 on HDP (Credit: danieleriksson.net)
+# Install Python2.7 & 3.6 on HDP Sandbox (Credit: danieleriksson.net)
 
 yum update
 
