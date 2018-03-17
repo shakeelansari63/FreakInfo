@@ -85,3 +85,26 @@
   ```console
   hdpworker2.sandbox
   ```
+
+# 7. Do SSH-KEY setup for all nodes, so they can communicate with each other.
+  ```console
+  ssh-keygen
+  cd ~/.ssh
+  cp id_rsa.pub authorized_keys
+  sftp root@<other nodes>
+  	cd /root
+	mkdir .ssh
+	put * ./
+  ```
+
+# 8. Add Ambari & HDP repos on master Node
+  ```console
+  cd /etc/yum/repos.d
+  wget http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.6.1.5/ambari.repo
+  wget http://public-repo-1.hortonworks.com/HDP/centos7/2.x/updates/2.6.4.0/hdp.repo
+  cd ~
+  yum repolist
+  ```
+  And you should see Ambari, HDP and HDP-UTILS repositories.
+  
+# 9. 
