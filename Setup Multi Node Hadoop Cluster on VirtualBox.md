@@ -161,4 +161,4 @@
 
 # 12. Login to Ambari from Host Machine 
   Now login to Ambari from Host machine browser and start setting up your cluster.
-  http://<masternode>:8080
+  http://\<masternode\>:8080
