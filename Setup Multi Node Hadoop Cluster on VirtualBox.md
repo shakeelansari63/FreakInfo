@@ -153,3 +153,7 @@
   firewall-cmd --zone=public --list-ports
   firewall-cmd --zone=public --permanent --list-ports
   ```
+
+# 12. Login to Ambari from Host Machine 
+  Now login to Ambari from Host machine browser and start setting up your cluster.
+  http://<masternode>:8080
