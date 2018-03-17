@@ -116,6 +116,11 @@
   [Follow instructions on this page to setup Ambari](https://docs.hortonworks.com/HDPDocuments/Ambari-2.6.1.5/bk_ambari-installation/content/set_up_the_ambari_server.html)
 
 # 11. Allow Firewall to access Ambari from Host Machine
+  Easiest Option would be to Stop Firewall on all VMs so that Ambari setup can access every port.
+  ```console
+  service firewalld stop
+  ```
+  If you have disabled Firewall service, you can proceed with step 12. If you don't want to disable firewall but want to allow every ports for Ambari, go for further steps.
   ```console
   service firewalld status
   ```
