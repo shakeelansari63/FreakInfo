@@ -92,7 +92,7 @@
   cd ~/.ssh
   cp id_rsa.pub authorized_keys
   sftp root@<other nodes>
-  	cd /root
+	cd /root
 	mkdir .ssh
 	put * ./
   ```
@@ -107,4 +107,49 @@
   ```
   And you should see Ambari, HDP and HDP-UTILS repositories.
   
-# 9. 
+# 9. Install Ambari-Server on Master Node
+  ```console
+  sudo yum install ambari-server
+  ```
+  
+# 10. Setup Ambari Server on Master Node
+  [Follow instructions on this page to setup Ambari](https://docs.hortonworks.com/HDPDocuments/Ambari-2.6.1.5/bk_ambari-installation/content/set_up_the_ambari_server.html)
+
+# 11. Allow Firewall to access Ambari from Host Machine
+  ```console
+  service firewalld status
+  ```
+  If above command tells that firewall is running, then follow these steps to allow connections from Host. 
+  
+  Else, go to Step 12.
+  
+  ```console
+  firewall-cmd --get-zones
+  ```
+  This should tell you firewall zones. We need *public* zone here.
+  ```console
+  firewall-cmd --zone=public --list-services
+  firewall-cmd --zone=public --permanent --list-zones
+  ```
+  This gives you list of services in Public Zone. We need http and https services in this zone. 
+  
+  If you do not see http and https, then add them using.
+  ```console
+  firewall-cmd --zone=public --add-service=http
+  firewall-cmd --zone=public --add-service=https
+  firewall-cmd --zone=public --permanent --add-service=http
+  firewall-cmd --zone=public --permanent --add-service=https
+  ```
+  Again run List services to check make sure http and https are added.
+  
+  Now allow 8080 port with following command
+  ```console
+  firewall-cmd --zone=public --add-port=8080/tcp
+  firewall-cmd --zone=public --permanent --add-port=8080/tcp
+  ```
+  
+  Confirm using 
+  ```console
+  firewall-cmd --zone=public --list-ports
+  firewall-cmd --zone=public --permanent --list-ports
+  ```
