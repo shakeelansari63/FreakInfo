@@ -134,7 +134,7 @@
   This should tell you firewall zones. We need *public* zone here.
   ```console
   firewall-cmd --zone=public --list-services
-  firewall-cmd --zone=public --permanent --list-zones
+  firewall-cmd --zone=public --permanent --list-services
   ```
   This gives you list of services in Public Zone. We need http and https services in this zone. 
   
