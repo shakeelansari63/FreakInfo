@@ -162,3 +162,53 @@
 # 12. Login to Ambari from Host Machine 
   Now login to Ambari from Host machine browser and start setting up your cluster.
   http://\<masternode\>:8080
+
+# 13. Rest setup can be done in Ambari. 
+  Note: While Hive setup, select new mysql database. If you want to use existing postgres database, then you have to make few changes to Postgres.
+  
+# 14. PostGres changes for Hive & Oozie Metastore.
+  Credits: [Sandeep Singh](https://hadoopjournal.wordpress.com/2015/07/25/hadoop-cluster-setup-ambari-installation-and-configuring-metastore-database/)
+  ```console
+  yum install postgresql-jdbc*
+  ls /usr/share/java/postgresql-jdbc.jar
+  ambari-server setup --jdbc-db=postgres --jdbc-driver=/usr/share/java/postgresql-jdbc.jar
+  ```
+  Now edit following pg_hba.conf file to give hive and oozie users access to metastore.
+  ```console
+  vim /var/lib/pgsql/data/pg_hba.conf
+  ```
+  ```console
+  # TYPE  DATABASE        USER            ADDRESS                 METHOD
+  # "local" is for Unix domain socket connections only
+  local   all   postgres                                     peer
+  # IPv4 local connections:
+  host    all   postgres             127.0.0.1/32            ident
+  # IPv6 local connections:
+  host    all   postgres             ::1/128                 ident
+  # Allow replication connections from localhost, by a user with the
+  # replication privilege.
+  #local   replication     postgres                                peer
+  #host    replication     postgres        127.0.0.1/32            ident
+  #host    replication     postgres        ::1/128                 ident
+  local  all  ambari,mapred,hive,oozie md5
+  host  all   ambari,mapred,hive,oozie 0.0.0.0/0  md5
+  host  all   ambari,mapred,hive,oozie ::/0 md5
+  ```
+  And restart postgres
+  ```console
+  service postgresql restart
+  ```
+  Now login to Postgres and add Hive and Oozie users and databases.
+  ```console
+  sudo su postgres
+  psql
+  ```
+  ```sql
+  create database hive;
+  create user hive with password 'HivePassword';
+  grant all privileges on database hive to hive;
+  create database oozie;
+  create user oozie with password 'OoziePassowrd';
+  grant all privileges on database oozie to oozie;
+  ```
+  
