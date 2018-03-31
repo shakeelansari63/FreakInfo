@@ -99,7 +99,7 @@
 
 # 8. Add Ambari & HDP repos on master Node
   ```console
-  cd /etc/yum/repos.d
+  cd /etc/yum.repos.d
   wget http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.6.1.5/ambari.repo
   wget http://public-repo-1.hortonworks.com/HDP/centos7/2.x/updates/2.6.4.0/hdp.repo
   cd ~
