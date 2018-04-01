@@ -212,3 +212,22 @@
   grant all privileges on database oozie to oozie;
   ```
   
+# 15. Installing MySql server
+  If you want to use mysql instead of built in PostGres, follow these steps.
+  ```console
+  wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+  sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+  yum update
+  sudo yum install mysql-server
+  ```
+  Reset the root user password
+  ```console
+  systemctl start mysqld
+  mysqladmin -u root password PasswordForRoot
+  ```
+  Remember this password as it will be neede while setup.
+  now start and enable mysql server
+  ```console
+  systemctl restart mysqld
+  systemctl enable mysqld
+  ```
