@@ -236,3 +236,13 @@
   yum install mysql-connector-java
   ambari-server setup --jdbc-db=mysql --jdbc-driver=/usr/share/java/mysql-connector-java.jar
   ```
+  And grant access to network users to mysql
+  ```console
+  mysql -u root -p
+  Enter Passowrd: PasswordForRoot
+  ```
+  ```sql
+  grant all privileges on *.* to 'root'@'hdp%' identified by 'freak' with grant option;
+  \q
+  ```
+  
