@@ -231,3 +231,8 @@
   systemctl restart mysqld
   systemctl enable mysqld
   ```
+  Now register JDBC connector with Ambari
+  ```console
+  yum install mysql-connector-java
+  ambari-server setup --jdbc-db=mysql --jdbc-driver=/usr/share/java/mysql-connector-java.jar
+  ```
