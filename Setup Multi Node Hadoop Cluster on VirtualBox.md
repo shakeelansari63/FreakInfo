@@ -246,3 +246,11 @@
   \q
   ```
   
+# 16. Pre-requisite for Falcon
+  Falcon use Bdb for Graph Db and need driver to be setup before installing Falcon. Follow this to setup jdbc driver for bdb
+  ```console
+  cd /usr/share/java
+  wget http://search.maven.org/remotecontent?filepath=com/sleepycat/je/5.0.73/je-5.0.73.jar
+  mv mv remotecontent?filepath=com%2Fsleepycat%2Fje%2F5.0.73%2Fje-5.0.73.jar je-5.0.73.jar
+  ambari-server setup --jdbc-db=bdb --jdbc-driver=/usr/share/java/je-5.0.73.jar
+  ```
